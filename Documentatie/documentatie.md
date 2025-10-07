@@ -97,11 +97,17 @@ De **GY-GPS6MV2** is een compacte en goedkope GPS-module die nauwkeurige locatie
 ---
 <small>bron: [opencircuit.be](https://opencircuit.be/product/gy-neo6mv2-gps-module)</small>
 
-### 3. TB600B (communicatie/transmissiemodule)
+### 3. TB600B (Gas Sensor Module voor NOx-meting)
 
-De **TB600B** is een communicatie- en transmissiemodule die wordt ingezet voor betrouwbare dataverbinding. Afhankelijk van de uitvoering kan deze module o.a. LoRa of andere draadloze protocollen ondersteunen.  
-- **Functie in dit project**: stabiele dataoverdracht naar backend of centrale server.  
-- **Waarom gekozen**: hoge betrouwbaarheid en geschikt voor langeafstandscommunicatie, ook in moeilijke omgevingen.  
+De **TB600B-NO2** is een geavanceerde elektrochemische gas sensor module die state-of-the-art solid polymer sensor technologie combineert met een geoptimaliseerde printplaat voor nauwkeurige gasdetectie. Deze module detecteert specifiek stikstofdioxide (NO2), een sleutelcomponent van NOx-gassen, met een meetbereik van typisch 0-100 ppm (afhankelijk van de variant). De sensor genereert een proportioneel elektrisch signaal via elektrochemische reacties en biedt een gestandaardiseerde digitale UART-output voor eenvoudige integratie.
+
+- **Functie in dit project**: Continue monitoring en meting van NOx-niveaus in de omgeving, voor emissie-analyse of luchtkwaliteitsbewaking. De data wordt verwerkt door de centrale controller voor real-time logging en alarmering.
+- **Waarom gekozen**: Uitstekende gevoeligheid en lage kruisgevoeligheid met andere gassen; robuust ontwerp (verwachte levensduur >36 maanden); laag stroomverbruik (<1 mA) en compact formaat, ideaal voor embedded systemen in uitdagende (industriële) omgevingen. Geen vloeibare elektrolyten, dus onderhoudsarm en betrouwbaar.
+- **Technische specs (kort)**: 
+  - Detectiebereik: 0-100 ppm NO2 (resolutie ~0.1 ppm).
+  - Reactietijd: <30 seconden.
+  - Voeding: 3.3-5V DC.
+  - Communicatie: UART (9600 baud) voor directe interfacing met microcontrollers zoals ESP32 of Arduino.
 
 ![TB600B](https://ecsense.com/wp-content/uploads/2024/01/TB600B-UART-Smart-Gas-Sensor-Module_Image1_20230920.jpg)
 
