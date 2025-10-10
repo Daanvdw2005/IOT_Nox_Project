@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
   <diagram name="Pagina-1" id="DU-Wa1h9kWfPb06VA9R2">
-    <mxGraphModel dx="1042" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1028" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -80,10 +80,10 @@
         <mxCell id="gdUQX9xmIUi1SOMKPsu3-17" value="AP Terra Platform&lt;div&gt;(monitoring &amp;amp; beheer)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="1005" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="AlHjVDfwS6b_n7NYaJfP-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="gdUQX9xmIUi1SOMKPsu3-24" target="AlHjVDfwS6b_n7NYaJfP-1">
+        <mxCell id="AlHjVDfwS6b_n7NYaJfP-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;" parent="1" source="gdUQX9xmIUi1SOMKPsu3-24" target="AlHjVDfwS6b_n7NYaJfP-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="AlHjVDfwS6b_n7NYaJfP-4" value="VCC/GND" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AlHjVDfwS6b_n7NYaJfP-2">
+        <mxCell id="AlHjVDfwS6b_n7NYaJfP-4" value="VCC/GND" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="AlHjVDfwS6b_n7NYaJfP-2" vertex="1" connectable="0">
           <mxGeometry x="-0.1906" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -132,13 +132,13 @@
         <mxCell id="gdUQX9xmIUi1SOMKPsu3-40" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Daan Van der Weken s150159&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Warre Van Rechem s149148&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="463.24" y="55.459999999999994" width="185" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AlHjVDfwS6b_n7NYaJfP-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="AlHjVDfwS6b_n7NYaJfP-1" target="gdUQX9xmIUi1SOMKPsu3-25">
+        <mxCell id="AlHjVDfwS6b_n7NYaJfP-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;curved=1;" parent="1" source="AlHjVDfwS6b_n7NYaJfP-1" target="gdUQX9xmIUi1SOMKPsu3-25" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="AlHjVDfwS6b_n7NYaJfP-1" value="Spannings-Converter" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="AlHjVDfwS6b_n7NYaJfP-1" value="Spannings-Converter" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="490" y="460" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="AlHjVDfwS6b_n7NYaJfP-5" value="VCC/GND" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+        <mxCell id="AlHjVDfwS6b_n7NYaJfP-5" value="VCC/GND" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="430" y="520" as="geometry" />
         </mxCell>
       </root>
