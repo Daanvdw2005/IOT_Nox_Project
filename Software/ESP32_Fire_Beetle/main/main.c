@@ -192,7 +192,7 @@
 #define UART_BAUD_RATE    9600
 #define UART_BUF_SIZE     256
 #define TASK_STACK_SIZE   4096
-#define TASK_PRIORITY     10
+#define TASK_PRIORITY     10     
 
 // -----------------------------
 // TB600B functies
