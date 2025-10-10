@@ -136,6 +136,16 @@ De **Fire Beetle** is een microcontroller gebaseerd op de **ESP32-chip** , beken
 
 <small>bron: [mouser.com](https://www.mouser.ee/new/dfrobot/dfrobot-firebeetle/?srsltid=AfmBOoqDlb6MdTixha_H_DCQiMpWg_wjTRkb6nnzp9LRMD-cIWrNpe94)</small>
 
+### 5. LoRa Radio 868MHz TEL0125
+
+We maken gebruik van deze module om via de fire beetle data te versturen via een lora netwerk te versturen. Het is een low power module gemaakt voor snel en gemakkelijk een transmissie te kunnen doen.
+
+![TEL0125](https://github.com/DFRobot/TEL0125/blob/master/600px-TEL0125_WIKI_Cover.jpg?raw=true)
+
+---
+
+<small>bron: [dfrobot.com](https://wiki.dfrobot.com/FireBeetle_Covers_LoRa_Radio_868MHz_SKU_TEL0125)</small>
+
 ## ap terra integratie
 
 Een belangrijk onderdeel van de nieuwe versie van het NOx-project is de **integratie met AP Terra**.
