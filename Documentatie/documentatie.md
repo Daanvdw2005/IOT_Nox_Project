@@ -138,7 +138,9 @@ De **Fire Beetle** is een microcontroller gebaseerd op de **ESP32-chip** , beken
 
 ### 5. LoRa Radio 868MHz TEL0125
 
-We maken gebruik van deze module om via de fire beetle data te versturen via een lora netwerk te versturen. Het is een low power module gemaakt voor snel en gemakkelijk een transmissie te kunnen doen.
+We maken gebruik van deze module om via de fire beetle data te versturen via een lora netwerk te versturen. Het is een low power module gemaakt voor snel en gemakkelijk een transmissie te kunnen doen. Het maakt gebruik van long range modulatie en is dus ideaal om data over een grote afstand te verzenden met minimale energieconsumptie.
+
+In het project maken we gebruik van deze module om in de stationaire fase data te gaan versturen naar ons ap terra platform. In latere fases zouden we naar andere technologien gaan kijken om de data te gaan zenden. Aangezien loraone bekend staat om lage zend tijd. En het ook zeer veel energie vraagt om elke meting te gaan doorsturen.
 
 ![TEL0125](https://github.com/DFRobot/TEL0125/blob/master/600px-TEL0125_WIKI_Cover.jpg?raw=true)
 
