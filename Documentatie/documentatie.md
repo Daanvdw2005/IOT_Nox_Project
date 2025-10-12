@@ -25,29 +25,39 @@ De eerste stap die we gaan bekijken of we de raspberry pi's gaan vervangen door 
 
 ## inhoud
 
-- start project
-- analyse
-- doel
-- technische basis
-- componenten
-- ap terra integratie
-- redesign en integratie
-- energie en teststrategie
-- verwachte resultaten
+- Het project
+- Analyse
+- Doel
+- Technische basis
+- Componenten
+- Ap terra integratie
+- Redesign en integratie
+- Energie en teststrategie
+- Huidige situatie
+- Planning
+- Verwachte resultaten
 
-## start project
+## Het project
+Daan Van der Weken en Warre Van Rechem
+
+Opdrachtgever: AP-Hogeschool
+Opleiding: Electronica-ICT IoT
+Lectoren: Mnr. Luyts, Mnr. Van Merode
 
 Het NOx-project is een vervolg op het eerdere **Bakens V2-project**. Bij de bakens lag de focus op het slimmer maken van de technologie (zoals verlichting in de haven) om veiligheid te verhogen en onderhoud efficiënter te maken.
 
 Bij NOx verschuift de focus naar het bouwen van een **mobiele sensoroplossing** die NOx-waardes kan meten. Deze data is belangrijk voor monitoring van de luchtkwaliteit in industriële omgevingen zoals havens.
 
-## analyse
+## Analyse
 
 We starten het project met het bekijken wat we allemaal moeten aansluiten en welke componenten we eventueel gaan vervangen. Elk component moet aan enkele vereisten voldoen. We werken aan dit project in 3 stadia:
 
-1. appart
-2. bakenverlichting
-3. drone
+1. Standalone:
+   Een stabiele, zelfstandige oplossing voor NOx-metingen.
+2. Stationair (bakenverlichting):
+   Integratie in bestaande bakenverlichting.
+3. Mobiel (drone):
+   Ontwikkeling van een payload voor drone-gebaseerde metingen.
 
 We willen ervoor zorgen dat we voor elk stadium zo weinig mogelijk moeten veranderen aan de opstelling, en dus zo weinig mogelijk andere componenten gaan gebruiken.
 
@@ -56,13 +66,14 @@ We willen ervoor zorgen dat we voor elk stadium zo weinig mogelijk moeten verand
 De eerste stap die we bekijken is of we de Raspberry Pi’s gaan vervangen door een **ESP32 module** zoals de Walter.
 De reden waarom we zouden kiezen voor de Walter is dat deze beschikt over een ingebouwde **4G module** waarmee data direct kan doorgestuurd worden.
 
-Na enkele testen hebben we besloten dat we geen gebruik gaan maken van de walter module. We werken vanaf nu voort met de fire Beetle.
+Na enkele testen hebben we besloten dat we geen gebruik gaan maken van de walter module. We werken vanaf nu voort met de FireBeetle.
 
-### Walter module
+
+### Fire Beetle
 
 We zetten ons project verder met de esp fire beetle. Dit is een veel gebruikte esp die we op campus op voorhand hebben. Deze module is ruim beschreven op het internet waardoor het makkelijker is om deze aan te sturen.
 
-## doel
+## Doel
 
 Het project heeft drie duidelijke pijlers:
 
@@ -75,18 +86,20 @@ Het project heeft drie duidelijke pijlers:
 3. **Optimaliseren van de energievoorziening**
    Voor zowel mobiele als stationaire systemen is een aangepaste energieoplossing nodig. Dit betekent herbekijken van de sspanningsbron en alternatieven uittesten.
 
-## technische basis
+## Technische basis
 
 De originele versie van NOx was gebouwd op **ROS-technologie**. Voor de nieuwe versie schakelen we over naar **ESP32** met **ESP-IDF** als ontwikkelomgeving. Dit geeft ons meer flexibiliteit.
 
-## componenten
+## Componenten
 
-### 1. Quickspot Walter (ESP32 + 4G) Niet meer in gebruik
+### 1. Quickspot Walter (ESP32 + 4G) **Niet meer in gebruik**
 
 De **Walter-module** is een krachtige ESP32-gebaseerde controller die beschikt over een ingebouwde **4G-module**. Dit maakt het mogelijk om data rechtstreeks te verzenden naar een centrale server, zonder afhankelijk te zijn van lokale netwerken.
 
 - **Functie in dit project**: centrale controller en communicatiehub.
 - **Waarom gekozen**: energiezuinig, flexibel te programmeren (ESP-IDF) en geschikt voor zowel mobiele als stationaire toepassingen.
+
+- **Reden stopzetting**: Na testen bleek de FireBeetle beter geschikt door beschikbaarheid en uitgebreide documentatie.
 
 ![Walter module](https://www.quickspot.io/images/walter-postcard.jpg)
 ---------------------------------------------------------------------
@@ -130,11 +143,11 @@ De **Fire Beetle** is een microcontroller gebaseerd op de **ESP32-chip** , beken
 
 * functie: Het aansturen van randcomponenten
 * Waarom gekozen: Ruime voorraad op de hogeschool. Makkelijk te programmeren via esp-idf.
-  ![FireBeetle](https://www.mouser.ee/images/marketingid/2017/img/117913583_DFRobot_FireBeetleESP32IOTMicrocontroller.png?v=061025.0726)
+  ![FireBeetle](https://m.media-amazon.com/images/I/71Ymtdf-fuL._UF1000,1000_QL80_.jpg)
 
 ---
 
-<small>bron: [mouser.com](https://www.mouser.ee/new/dfrobot/dfrobot-firebeetle/?srsltid=AfmBOoqDlb6MdTixha_H_DCQiMpWg_wjTRkb6nnzp9LRMD-cIWrNpe94)</small>
+<small>bron: [amazon.com](amazon.de/DFRobot-FireBeetle-kompatibel-Microcontroller-Entwicklungsboard-standard/dp/B08VNY821Y)</small>
 
 ### 5. LoRa Radio 868MHz TEL0125
 
@@ -148,7 +161,33 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 
 <small>bron: [dfrobot.com](https://wiki.dfrobot.com/FireBeetle_Covers_LoRa_Radio_868MHz_SKU_TEL0125)</small>
 
-## ap terra integratie
+### 6. Zonnepaneel (SPM040201200)
+
+- Het **SPM040201200** zonnepaneel levert 20W vermogen met een uitgangsstroom van 1,06A bij 18,5V.
+- **Functie in dit project**: Energievoorziening voor de standalone en stationaire opstellingen, vooral voor langdurig gebruik in buitenomgevingen.
+- **Waarom gekozen**: Voldoende vermogen om de FireBeetle, sensoren en communicatieapparatuur van stroom te voorzien, geschikt voor weerbestendige toepassingen.
+![Victron](https://www.splitcharge.co.uk/wp-content/uploads/2022/06/SPM040201200-Victron-Energy-300x300.png)  
+<small>bron: [splitcharge.co.uk](https://www.splitcharge.co.uk/product/victron-energy-20w-12v-mono-spm040201200-series-4a/?srsltid=AfmBOoqSyBVVAsSYU_M9W9vNs0R912W0VjO1F38gjK2i6Yjz0UWibSrl)</small>
+
+### 7. Solar Power Manager (Waveshare) **- NIEUW**
+
+- De **Waveshare Solar Power Manager** wordt gebruikt in combinatie met een lithium-polymeerbatterij om energie efficiënt te beheren.
+- **Functie in dit project**: Regelt de energievoorziening vanuit het zonnepaneel en zorgt voor stabiele voeding naar de FireBeetle en andere componenten. Buffert energie in de batterij voor gebruik tijdens nachtelijke uren of bewolkte omstandigheden.
+- **Waarom gekozen**: Betrouwbare energiebeheeroplossing, compatibel met lithium-polymeerbatterijen, en geschikt voor IoT-toepassingen.
+
+![Solar Power Manager](https://www.waveshare.com/w/upload/thumb/c/cc/Solar-Power-Manager01.jpg/300px-Solar-Power-Manager01.jpg)  
+<small>bron: [waveshare.com](https://www.waveshare.com/wiki/Solar_Power_Manager)</small>
+
+### 8. PCB
+
+- Een **custom PCB** wordt ontworpen om alle componenten (FireBeetle, GPS-module, gassensor, LoRa-module, en energiebeheer) efficiënt te integreren.
+- **Functie in dit project**: Centrale hardwarebasis die alle componenten verbindt en zorgt voor een compacte, robuuste opstelling.
+- **Waarom gekozen**: Verhoogt de betrouwbaarheid en vereenvoudigt de montage, vooral voor de stationaire en drone-fases.
+
+![PCB_schematic](image.png)
+![PCB_3D](image-1.png)
+
+## Ap terra integratie
 
 Een belangrijk onderdeel van de nieuwe versie van het NOx-project is de **integratie met AP Terra**.
 
@@ -160,15 +199,15 @@ Een belangrijk onderdeel van de nieuwe versie van het NOx-project is de **integr
 
 Met deze integratie wordt het NOx-systeem niet enkel een sensoroplossing, maar ook een **volwaardige IoT-oplossing** die direct inzetbaar is bij de klant.
 
-## redesign en integratie
+## Redesign en integratie
 
 De integratie met de klant is gewijzigd, waardoor een **redesign** nodig is. Concreet:
 
 - Het mobiele systeem moet betrouwbaar meetdata kunnen doorsturen.
 - Voor de stationaire bakens willen we dezelfde NOx-functionaliteit kunnen toevoegen.
-- Voor drones wordt een lichte en energiezuinige payload ontworpen.
+- Voor drones wordt een lichte en energiezuinige payload ontworpen, inclusief specifieke communicatie- en dataopslagmethoden.
 
-## energie en teststrategie
+## Energie en teststrategie
 
 Een belangrijk aandachtspunt is de **energievoorziening**. Deze wordt kritisch geëvalueerd:
 
@@ -178,10 +217,10 @@ Een belangrijk aandachtspunt is de **energievoorziening**. Deze wordt kritisch g
 Daarnaast wordt er een **gestructureerde teststrategie** opgezet:
 
 - Automatisch testen in plaats van enkel veldproeven.
-- Karakteristieken opmeten en analyseren.
+- KaraDkteristieken opmeten en analyseren.
 - Duurtestscenario’s om betrouwbaarheid te garanderen.
 
-## verwachte resultaten
+## Verwachte resultaten
 
 Met NOx willen we een robuuste oplossing bouwen die zowel **stationair als mobiel** inzetbaar is. Het systeem moet in staat zijn om:
 
@@ -190,3 +229,8 @@ Met NOx willen we een robuuste oplossing bouwen die zowel **stationair als mobie
 - Efficiënt en betrouwbaar te communiceren met de backend (via TB600B).
 - Energiezuinig te functioneren, ook in uitdagende omstandigheden.
 - Centraal beheerd en gemonitord te worden via **AP Terra**.
+
+## Planning
+
+De planning kan u terug vinden op onze project GitHub.
+- Planning: 
