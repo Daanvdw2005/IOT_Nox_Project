@@ -233,4 +233,5 @@ Met NOx willen we een robuuste oplossing bouwen die zowel **stationair als mobie
 ## Planning
 
 De planning kan u terug vinden op onze project GitHub.
-- Planning: 
+- Planning: [Planning](https://github.com/Daanvdw2005/IOT_Nox_Project/blob/main/Documentatie/planning_12_10_2025.md)
+- GitHub: [GitHub](https://github.com/Daanvdw2005/IOT_Nox_Project.git)
