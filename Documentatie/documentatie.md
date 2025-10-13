@@ -166,10 +166,11 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 - Het **SPM040201200** zonnepaneel levert 20W vermogen met een uitgangsstroom van 1,06A bij 18,5V.
 - **Functie in dit project**: Energievoorziening voor de standalone en stationaire opstellingen, vooral voor langdurig gebruik in buitenomgevingen.
 - **Waarom gekozen**: Voldoende vermogen om de FireBeetle, sensoren en communicatieapparatuur van stroom te voorzien, geschikt voor weerbestendige toepassingen.
+
 ![Victron](https://www.splitcharge.co.uk/wp-content/uploads/2022/06/SPM040201200-Victron-Energy-300x300.png)  
 <small>bron: [splitcharge.co.uk](https://www.splitcharge.co.uk/product/victron-energy-20w-12v-mono-spm040201200-series-4a/?srsltid=AfmBOoqSyBVVAsSYU_M9W9vNs0R912W0VjO1F38gjK2i6Yjz0UWibSrl)</small>
 
-### 7. Solar Power Manager (Waveshare) **- NIEUW**
+### 7. Solar Power Manager (Waveshare)
 
 - De **Waveshare Solar Power Manager** wordt gebruikt in combinatie met een lithium-polymeerbatterij om energie efficiënt te beheren.
 - **Functie in dit project**: Regelt de energievoorziening vanuit het zonnepaneel en zorgt voor stabiele voeding naar de FireBeetle en andere componenten. Buffert energie in de batterij voor gebruik tijdens nachtelijke uren of bewolkte omstandigheden.
