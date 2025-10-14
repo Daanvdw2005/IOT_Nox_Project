@@ -86,7 +86,9 @@ Het project heeft drie duidelijke pijlers:
 3. **Optimaliseren van de energievoorziening**
    Voor zowel mobiele als stationaire systemen is een aangepaste energieoplossing nodig. Dit betekent herbekijken van de sspanningsbron en alternatieven uittesten.
 
-Voor het eindproject (doel) hebben we een schema ontwikkeld dat hieronder zichtbaar is. Klik op de afbeelding om te vergroten:
+Voor het eindproject (doel) hebben we een schema ontwikkeld dat hieronder zichtbaar is. 
+
+Klik op de afbeelding om te vergroten:
 
 [![Schema van het project](Afbeeldingen/Blokdiagram_doelstelling.drawio_small.png)](Afbeeldingen/Blokdiagram_doelstelling_XL.drawio.png)
 ## Technische basis
@@ -188,6 +190,10 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 - Een **custom PCB** wordt ontworpen om alle componenten (FireBeetle, GPS-module, gassensor, LoRa-module, en energiebeheer) efficiënt te integreren.
 - **Functie in dit project**: Centrale hardwarebasis die alle componenten verbindt en zorgt voor een compacte, robuuste opstelling.
 - **Waarom gekozen**: Verhoogt de betrouwbaarheid en vereenvoudigt de montage, vooral voor de stationaire en drone-fases.
+
+
+
+Klik op de afbeeldingen om te vergroten:
 
 [![PCB_schematic](Afbeeldingen/image_small.png)](Afbeeldingen/image.png)
 [![PCB_3D](Afbeeldingen/image-1_small.png)](Afbeeldingen/image-1.png)
