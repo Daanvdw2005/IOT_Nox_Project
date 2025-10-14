@@ -104,7 +104,7 @@ De **Walter-module** is een krachtige ESP32-gebaseerde controller die beschikt o
 
 - **Reden stopzetting**: Na testen bleek de FireBeetle beter geschikt door beschikbaarheid en uitgebreide documentatie.
 
-![Walter module](https://www.quickspot.io/images/walter-postcard.jpg)
+![Walter module](Afbeeldingen/image_1.jpeg)
 ---------------------------------------------------------------------
 
 <small>bron: [quickspot.io](https://www.quickspot.io/)</small>
@@ -116,7 +116,7 @@ De **GY-GPS6MV2** is een compacte en goedkope GPS-module die nauwkeurige locatie
 - **Functie in dit project**: locatie koppelen aan elke NOx-meting.
 - **Waarom gekozen**: lichtgewicht, laag energieverbruik en eenvoudig aan te sluiten via seriële communicatie.
 
-![GY-GPS6MV2](https://cdn.bodanius.com/media/1/79b100556_gy-neo6mv2-gps-module_600x.webp)
+![GY-GPS6MV2](Afbeeldingen/image_2.webp)
 
 ---
 
@@ -134,7 +134,7 @@ De **TB600B-NO2** is een geavanceerde elektrochemische gas sensor module die sta
   - Voeding: 3.3-5V DC.
   - Communicatie: UART (9600 baud) voor directe interfacing met microcontrollers zoals ESP32 of Arduino.
 
-![TB600B](https://ecsense.com/wp-content/uploads/2024/01/TB600B-UART-Smart-Gas-Sensor-Module_Image1_20230920.jpg)
+![TB600B](Afbeeldingen/image_3.jpeg)
 
 ---
 
@@ -146,7 +146,8 @@ De **Fire Beetle** is een microcontroller gebaseerd op de **ESP32-chip** , beken
 
 * functie: Het aansturen van randcomponenten
 * Waarom gekozen: Ruime voorraad op de hogeschool. Makkelijk te programmeren via esp-idf.
-  ![FireBeetle](https://m.media-amazon.com/images/I/71Ymtdf-fuL._UF1000,1000_QL80_.jpg)
+  
+![FireBeetle](Afbeeldingen/image_4.jpeg)
 
 ---
 
@@ -158,7 +159,7 @@ We maken gebruik van deze module om via de fire beetle data te versturen via een
 
 In het project maken we gebruik van deze module om in de stationaire fase data te gaan versturen naar ons ap terra platform. In latere fases zouden we naar andere technologien gaan kijken om de data te gaan zenden. Aangezien loraone bekend staat om lage zend tijd. En het ook zeer veel energie vraagt om elke meting te gaan doorsturen.
 
-![TEL0125](https://github.com/DFRobot/TEL0125/blob/master/600px-TEL0125_WIKI_Cover.jpg?raw=true)
+![TEL0125](Afbeeldingen/image_5.jpeg)
 
 ---
 
@@ -170,7 +171,7 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 - **Functie in dit project**: Energievoorziening voor de standalone en stationaire opstellingen, vooral voor langdurig gebruik in buitenomgevingen.
 - **Waarom gekozen**: Voldoende vermogen om de FireBeetle, sensoren en communicatieapparatuur van stroom te voorzien, geschikt voor weerbestendige toepassingen.
 
-![Victron](https://www.splitcharge.co.uk/wp-content/uploads/2022/06/SPM040201200-Victron-Energy-300x300.png)  
+![Victron](Afbeeldingen/image_6.png)  
 <small>bron: [splitcharge.co.uk](https://www.splitcharge.co.uk/product/victron-energy-20w-12v-mono-spm040201200-series-4a/?srsltid=AfmBOoqSyBVVAsSYU_M9W9vNs0R912W0VjO1F38gjK2i6Yjz0UWibSrl)</small>
 
 ### 7. Solar Power Manager (Waveshare)
@@ -179,7 +180,7 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 - **Functie in dit project**: Regelt de energievoorziening vanuit het zonnepaneel en zorgt voor stabiele voeding naar de FireBeetle en andere componenten. Buffert energie in de batterij voor gebruik tijdens nachtelijke uren of bewolkte omstandigheden.
 - **Waarom gekozen**: Betrouwbare energiebeheeroplossing, compatibel met lithium-polymeerbatterijen, en geschikt voor IoT-toepassingen.
 
-![Solar Power Manager](https://www.waveshare.com/w/upload/thumb/c/cc/Solar-Power-Manager01.jpg/300px-Solar-Power-Manager01.jpg)  
+![Solar Power Manager](Afbeeldingen/image_7.jpeg)  
 <small>bron: [waveshare.com](https://www.waveshare.com/wiki/Solar_Power_Manager)</small>
 
 ### 8. PCB
