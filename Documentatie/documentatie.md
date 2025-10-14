@@ -86,6 +86,9 @@ Het project heeft drie duidelijke pijlers:
 3. **Optimaliseren van de energievoorziening**
    Voor zowel mobiele als stationaire systemen is een aangepaste energieoplossing nodig. Dit betekent herbekijken van de sspanningsbron en alternatieven uittesten.
 
+Voor het eindproject (doel) hebben we een schema ontwikkeld dat hieronder zichtbaar is. Klik op de afbeelding om te vergroten:
+
+[![Schema van het project](Afbeeldingen/Blokdiagram_doelstelling.drawio.png)](Afbeeldingen/Blokdiagram_doelstelling_XL.drawio.png)
 ## Technische basis
 
 De originele versie van NOx was gebouwd op **ROS-technologie**. Voor de nieuwe versie schakelen we over naar **ESP32** met **ESP-IDF** als ontwikkelomgeving. Dit geeft ons meer flexibiliteit.
@@ -185,8 +188,8 @@ In het project maken we gebruik van deze module om in de stationaire fase data t
 - **Functie in dit project**: Centrale hardwarebasis die alle componenten verbindt en zorgt voor een compacte, robuuste opstelling.
 - **Waarom gekozen**: Verhoogt de betrouwbaarheid en vereenvoudigt de montage, vooral voor de stationaire en drone-fases.
 
-![PCB_schematic](image.png)
-![PCB_3D](image-1.png)
+![PCB_schematic](Afbeeldingen/image.png)
+![PCB_3D](Afbeeldingen/image-1.png)
 
 ## Ap terra integratie
 
