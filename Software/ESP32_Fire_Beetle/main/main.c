@@ -187,7 +187,7 @@
 // GPS-module
 #define UART_GPS_NUM      UART_NUM_2
 #define GPS_TX_PIN        GPIO_NUM_26
-#define GPS_RX_PIN        GPIO_NUM_25
+#define GPS_RX_PIN        GPIO_NUM_27
 
 #define UART_BAUD_RATE    9600
 #define UART_BUF_SIZE     256
