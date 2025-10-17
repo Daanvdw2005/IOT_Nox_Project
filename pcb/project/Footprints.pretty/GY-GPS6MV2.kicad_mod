@@ -1,0 +1,437 @@
+(footprint "GY-GPS6MV2"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "J1"
+		(at -1.825 -3.485 180)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "35258a90-5054-4ec2-8edc-2e083898bef4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "110990030"
+		(at 4.525 4.385 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9047df78-a8b4-4001-9559-fa43d69c3fa7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9cdfb821-2c0d-4623-88b3-bc3393096bc3")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d7764d3b-aee8-4a6c-b1c0-b309ba8d703c")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MF" "Seeed Studio"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3107f88b-c9c0-4e82-85e7-eb61761a1153")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MAXIMUM_PACKAGE_HEIGHT" "8.1mm"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "59d49cd5-25a4-4229-8421-40a4c8a24d26")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Package" "None"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ad7e65bf-28c0-4bf3-a8cd-c20eac779ca0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Price" "None"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2ba95a5f-0241-438f-afe7-660f452b60f7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Check_prices" "https://www.snapeda.com/parts/110990030%2010PCS/PACK/Seeed+Studio/view-part/?ref=eda"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f74f0aca-4c12-46f5-8491-4e2405751231")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "STANDARD" "Manufacturer Recommendations"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "555c6915-e68f-480c-9c81-e2a4d495d380")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "PARTREV" "A"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c25a743a-b077-42a4-83a4-a5c3cf474e36")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "SnapEDA_Link" "https://www.snapeda.com/parts/110990030%2010PCS/PACK/Seeed+Studio/view-part/?ref=snap"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "efd96abd-898f-48c2-88a1-8a4178ee1150")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MP" "110990030 10PCS/PACK"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1a2146f2-6528-41cf-acb3-6b55a258c04d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description_1" "Grove - Universal 4 pin connector [Seeed Studio] 110990030 10PCS/PACK Grove - Universal 4 pin connector"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "74189d00-3ee2-434e-8af1-f7dfd10d0a9d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Availability" "Not in stock"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fa434851-27c3-4f28-a10e-f95aa3450ad3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MANUFACTURER" "Seeed Technology"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0c20eb6f-d00f-44fa-bd37-8dc41481c0ff")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -12.5 -18)
+		(end 12.5 -18)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "08a1eb2e-823a-4b80-8947-780d5b39f289")
+	)
+	(fp_line
+		(start -12.5 18)
+		(end -12.5 -18)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "65ef3778-e2dc-48e5-8996-82bb62daa883")
+	)
+	(fp_line
+		(start -12.5 18)
+		(end 12.5 18)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b84665f5-28e4-4017-a491-b5787487ce1f")
+	)
+	(fp_line
+		(start 12.5 18)
+		(end 12.5 -18)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3e4099fd-25b2-4a4c-8c04-d3c46e444fb1")
+	)
+	(fp_circle
+		(center -10 -15.5)
+		(end -10 -13.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "171c8625-fceb-4618-b910-8d954d8e6ddc")
+	)
+	(fp_circle
+		(center -10 15.5)
+		(end -10 17.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "8dce268d-0802-4a07-a319-ed9803d49296")
+	)
+	(fp_circle
+		(center 10 -15.5)
+		(end 10 -13.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "7b9b2425-a710-4f8c-9d54-ebf2bba83d1f")
+	)
+	(fp_circle
+		(center 10 15.5)
+		(end 10 17.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "b7499b2a-00da-48d2-b3ee-4bd9e032c24c")
+	)
+	(fp_line
+		(start -13 -18.5)
+		(end -13 18.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "4bca8440-c5ef-4d43-875a-c737def67301")
+	)
+	(fp_line
+		(start -13 -18.5)
+		(end 13 -18.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "3380bb2e-8f7e-4ca7-9ed0-9131163b6150")
+	)
+	(fp_line
+		(start -13 18.5)
+		(end 13 18.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "5d3eab9b-d475-4f05-8623-7506cbdb15bf")
+	)
+	(fp_line
+		(start 13 -18.5)
+		(end 13 18.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b55ac411-2136-4cb7-9b1b-497059d79caf")
+	)
+	(fp_text user "RX"
+		(at -1.5 -15.5 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "36693c6d-c85c-45ac-912e-6e8550beeeff")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "TX"
+		(at 0.5 -15.5 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "b3e7b886-45c1-401d-8fde-4a57cef493a8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "VCC"
+		(at -3.5 -15.5 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "c6d28241-c71e-495f-b871-d51437dfcf3f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "GND"
+		(at 2.5 -15.5 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "ce2031f7-3b6d-4d66-86f2-8201210d5a6e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "GY-GPS6MV2"
+		(at -5 0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "f2a56178-c173-45cd-a347-4c398dad9c9c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at 3 -17 180)
+		(size 1.308 1.308)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "4c6e7778-87d3-4568-85fb-2906c33ebaaf")
+	)
+	(pad "2" thru_hole circle
+		(at 1 -17 180)
+		(size 1.308 1.308)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "6a570d5f-184c-4063-be46-4dbfdfa3adbc")
+	)
+	(pad "3" thru_hole circle
+		(at -1 -17 180)
+		(size 1.308 1.308)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "f2c796be-af55-40de-a34b-ef8280d32c41")
+	)
+	(pad "4" thru_hole circle
+		(at -3 -17 180)
+		(size 1.308 1.308)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "a46c19cb-0017-4e5e-972b-be33007a6984")
+	)
+	(embedded_fonts no)
+)
