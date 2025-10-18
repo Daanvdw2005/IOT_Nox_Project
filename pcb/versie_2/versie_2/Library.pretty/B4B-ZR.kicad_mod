@@ -128,4 +128,15 @@
 		(uuid "4083b610-0733-4890-a8b4-a46235d053a5")
 	)
 	(embedded_fonts no)
+	(model "C:/Users/vande/Documents/GitHub/IOT_Nox_Project/pcb/B4B-ZR-SM4-TF-LF--SN---3DModel-STEP-56544.STEP"
+		(offset
+			(xyz 3.75 -1 2.0003)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -180 -0 -0)
+		)
+	)
 )
