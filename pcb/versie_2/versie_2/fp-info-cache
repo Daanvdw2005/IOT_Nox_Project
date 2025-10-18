@@ -1,4 +1,4 @@
-26639892496129552
+26643413925208075
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -70552,6 +70552,20 @@ Yellow 5381 Series LED
 0
 2
 2
+Library
+B4B-ZR
+<b>ZH CONNECTOR</b>  Top entry type, 1.5 mm, 4 pin 1 row<p>Source: http://www.jst.com .. eZH.pdf
+
+0
+4
+4
+Library
+CONN_B4B-ZR-SM4-TF_JST
+
+B4B-ZR-SM4-TF LFSN 
+0
+6
+6
 Library
 FIREBEETLE_ESP32
 FireBeetle ESP32

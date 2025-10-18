@@ -1,0 +1,131 @@
+(footprint "B4B-ZR"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "<b>ZH CONNECTOR</b>  Top entry type, 1.5 mm, 4 pin 1 row<p>Source: http://www.jst.com .. eZH.pdf")
+	(property "Reference" "REF**"
+		(at 2.425 -0.905 0)
+		(layer "F.SilkS")
+		(uuid "125028d2-a837-4d27-a930-844a53524d15")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "B4B-ZR"
+		(at 3.06 4.73 0)
+		(layer "F.Fab")
+		(uuid "98e65d73-1670-4bd2-a92f-89324d07be06")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a86910a6-98ab-4197-b508-0c749ea68139")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8d0e94eb-d250-49da-8313-b84f9c3a4107")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start 0 -0.07)
+		(end 7.5 -0.07)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ec1d8953-92f4-4a35-9345-09b34700867a")
+	)
+	(fp_line
+		(start 0 3.43)
+		(end 0 -0.07)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2c35e679-0feb-4505-aa6c-c1588574109d")
+	)
+	(fp_line
+		(start 7.5 -0.07)
+		(end 7.5 3.43)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "68ba6e7b-5ea9-49b6-bf94-370873e35edd")
+	)
+	(fp_line
+		(start 7.5 3.43)
+		(end 0 3.43)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "bcfde50d-5859-4277-a1aa-53740c0eada0")
+	)
+	(pad "1" thru_hole circle
+		(at 6 1.3)
+		(size 1.208 1.208)
+		(drill 0.7)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "7f550d7a-1146-40f0-a5f3-dfe12734ebb2")
+	)
+	(pad "2" thru_hole circle
+		(at 4.5 1.3)
+		(size 1.208 1.208)
+		(drill 0.7)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "f12107c5-815e-4ff4-a974-077df20a0d75")
+	)
+	(pad "3" thru_hole circle
+		(at 3 1.3)
+		(size 1.208 1.208)
+		(drill 0.7)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "290714fd-3abe-43df-be02-46ecd8d4bad6")
+	)
+	(pad "4" thru_hole circle
+		(at 1.5 1.3)
+		(size 1.208 1.208)
+		(drill 0.7)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(solder_mask_margin 0.102)
+		(uuid "4083b610-0733-4890-a8b4-a46235d053a5")
+	)
+	(embedded_fonts no)
+)
