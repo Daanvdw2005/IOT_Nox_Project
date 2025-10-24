@@ -170,6 +170,7 @@
 // }
 //end-----------------------------------------test-TB600B-------------------------------------------------
 
+//start-----------------------------------------werkend-------------------------------------------------
 
 #include <stdio.h>
 #include <string.h>
@@ -311,3 +312,4 @@ void app_main(void) {
     xTaskCreate(tb600b_task, "tb600b_task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(gps_task, "gps_task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }
+//  -----------------------------------------werkend-------------------------------------------------
