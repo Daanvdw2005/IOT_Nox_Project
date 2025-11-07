@@ -1,0 +1,11 @@
+name: firebeetle-espidf-ttn
+version: 0.1.0
+description: ESP-IDF project for sending data to The Things Network via LoRa using FireBeetle
+dependencies:
+  - lora_radio
+  - ttn
+components:
+  - lora_radio:
+      path: components/lora_radio
+  - ttn:
+      path: components/ttn
