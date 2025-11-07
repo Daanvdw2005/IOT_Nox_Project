@@ -1403,7 +1403,7 @@
 			(at -1.825 3.485 180)
 			(layer "B.SilkS")
 			(hide yes)
-			(uuid "bc39a07a-cf3f-40e7-8e12-58b6a6d07cc6")
+			(uuid "722b3d68-84b4-459a-b2f6-155fd72faeda")
 			(effects
 				(font
 					(size 1 1)
@@ -1416,7 +1416,7 @@
 			(at 4.525 -4.385 180)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "00315585-dca3-4cdd-9778-5fe2dc4be345")
+			(uuid "3e68feba-0ba6-4e6a-a75f-2005e485b682")
 			(effects
 				(font
 					(size 1 1)
@@ -1429,7 +1429,7 @@
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "afe835ec-70ce-40e2-be5a-721424d8e409")
+			(uuid "13dc8bb2-d899-4835-a6ee-cce19ee8f1d6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1442,7 +1442,7 @@
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "44b04ba3-70a0-4de0-9e45-7a4081c33ba0")
+			(uuid "7615075c-6551-4d53-b4ee-ab411da1ef13")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1774,7 +1774,7 @@
 			)
 		)
 		(pad "1" thru_hole rect
-			(at 3 17.05 180)
+			(at 3.822669 17.040761 180)
 			(size 1.308 1.308)
 			(drill 0.8)
 			(layers "*.Cu" "*.Mask")
@@ -1786,7 +1786,7 @@
 			(uuid "2ac6c8a5-6583-4119-872c-f3af2f2e0f82")
 		)
 		(pad "2" thru_hole circle
-			(at 1 17.05 180)
+			(at 1.275292 17.040761 180)
 			(size 1.308 1.308)
 			(drill 0.8)
 			(layers "*.Cu" "*.Mask")
@@ -1798,7 +1798,7 @@
 			(uuid "4a5d5c9d-00d9-4223-91f8-5299d10493b9")
 		)
 		(pad "3" thru_hole circle
-			(at -1 17.05 180)
+			(at -1.272085 17.040761 180)
 			(size 1.308 1.308)
 			(drill 0.8)
 			(layers "*.Cu" "*.Mask")
@@ -1810,7 +1810,7 @@
 			(uuid "c6b63a05-4901-431d-a288-c5c3990dab33")
 		)
 		(pad "4" thru_hole circle
-			(at -3 17.05 180)
+			(at -3.819462 17.040761 180)
 			(size 1.308 1.308)
 			(drill 0.8)
 			(layers "*.Cu" "*.Mask")
@@ -1820,6 +1820,12 @@
 			(pintype "passive")
 			(solder_mask_margin 0.102)
 			(uuid "d32c41c6-2ec0-4a7c-988f-bb8c97428825")
+		)
+		(group ""
+			(uuid "4f4a57c7-0de0-408f-86be-f832c7166cbd")
+			(members "2ac6c8a5-6583-4119-872c-f3af2f2e0f82" "4a5d5c9d-00d9-4223-91f8-5299d10493b9"
+				"c6b63a05-4901-431d-a288-c5c3990dab33" "d32c41c6-2ec0-4a7c-988f-bb8c97428825"
+			)
 		)
 		(embedded_fonts no)
 	)
