@@ -137,14 +137,50 @@ void app_main(void)
     {
         ESP_LOGI(TAG, "=== Voorbereiden uplink #%lu ===", (unsigned long)frame_counter);
         
-        uint8_t payload[2] = {
-            (uint8_t)((frame_counter >> 8) & 0xFF),
-            (uint8_t)(frame_counter & 0xFF),
-        };
-
+        // Voorbeeld: Verzend meerdere waardes
+        // Payload structuur (8 bytes totaal):
+        // Byte 0-1: Frame counter (uint16_t)
+        // Byte 2-3: Temperatuur in tienden graden (int16_t, bijv. 253 = 25.3°C)
+        // Byte 4:   Luchtvochtigheid (uint8_t, 0-100%)
+        // Byte 5-6: Lichtintensiteit in lux (uint16_t)
+        // Byte 7:   Status byte (uint8_t, bitflags)
+        
+        // Voorbeeld waardes (vervang later met echte sensordata)
+        int16_t temperature = 253;  // 25.3°C (in tienden graden)
+        uint8_t humidity = 65;      // 65%
+        uint16_t light = 1250;       // 1250 lux
+        uint8_t status = 0x01;       // Status flags
+        
+        uint8_t payload[8];
+        
+        // Frame counter (2 bytes)
+        payload[0] = (uint8_t)((frame_counter >> 8) & 0xFF);
+        payload[1] = (uint8_t)(frame_counter & 0xFF);
+        
+        // Temperatuur (2 bytes, signed)
+        payload[2] = (uint8_t)((temperature >> 8) & 0xFF);
+        payload[3] = (uint8_t)(temperature & 0xFF);
+        
+        // Luchtvochtigheid (1 byte)
+        payload[4] = humidity;
+        
+        // Lichtintensiteit (2 bytes)
+        payload[5] = (uint8_t)((light >> 8) & 0xFF);
+        payload[6] = (uint8_t)(light & 0xFF);
+        
+        // Status (1 byte)
+        payload[7] = status;
+        
+        // Log de waardes
+        ESP_LOGI(TAG, "Frame counter: %lu", (unsigned long)frame_counter);
+        ESP_LOGI(TAG, "Temperatuur: %d (%.1f°C)", temperature, temperature / 10.0f);
+        ESP_LOGI(TAG, "Luchtvochtigheid: %u%%", humidity);
+        ESP_LOGI(TAG, "Lichtintensiteit: %u lux", light);
+        ESP_LOGI(TAG, "Status: 0x%02X", status);
+        
         log_hex_payload("Uplink payload (hex)", payload, sizeof(payload));
         ESP_LOGI(TAG, "Aanroepen ttn_transmit_message...");
-
+        
         ttn_response_code_t result = ttn_transmit_message(payload, sizeof(payload), 1, false);
         
         ESP_LOGI(TAG, "ttn_transmit_message retourneerde: %d", (int)result);
