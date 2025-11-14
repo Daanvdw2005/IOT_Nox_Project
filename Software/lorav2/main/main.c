@@ -18,14 +18,10 @@
 #define LORA_RST     14
 #define LORA_DIO0    26
 
-// TTN configuratie - Pas aan!
-#define TTN_APP_EUI "0000000000000000"  // Voor OTAA (8 bytes, hex)
-#define TTN_DEV_EUI "0000000000000000"  // Voor OTAA (8 bytes, hex)
-#define TTN_APP_KEY "010203040506070801020304050607080102030405060708"  // Voor OTAA (16 bytes, hex)
-
-#define TTN_DEV_ADDR "\x02\x00\x00\x00"  // Voor ABP (4 bytes, hex)
-#define TTN_NWKSKEY "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"  // Voor ABP (16 bytes, hex)
-#define TTN_APPSKEY "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"  // Voor ABP (16 bytes, hex)
+// TTN configuratie - ingevuld voor OTAA
+#define TTN_APP_EUI "0000000000000000"  // 8 bytes, hex
+#define TTN_DEV_EUI "70B3D57ED0074065"  // 8 bytes, hex
+#define TTN_APP_KEY "BB05FA024CFC992CE1E192BB7E261274"  // 16 bytes, hex
 
 // Frequentieplan (EU of US)
 #define TTN_FREQ_PLAN TTN_FP_EU868
@@ -85,8 +81,8 @@ void app_main() {
     // Radio setup
     setup_radio();
 
-    // TTN initialiseren (gebruik ABP hier; voor OTAA: ttn_init_otaa)
-    ttn_init_abp(&ttn_ctx, TTN_DEV_ADDR, TTN_NWKSKEY, TTN_APPSKEY, TTN_FREQ_PLAN);
+    // TTN initialiseren (OTAA)
+    ttn_init_otaa(&ttn_ctx, TTN_DEV_EUI, TTN_APP_EUI, TTN_APP_KEY, TTN_FREQ_PLAN);
     ttn_set_receive_callback(&ttn_ctx, onReceive);
     ttn_set_send_callback(&ttn_ctx, app_send_callback);
 
