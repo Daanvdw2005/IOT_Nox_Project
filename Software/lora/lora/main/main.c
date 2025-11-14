@@ -32,19 +32,27 @@ static const char *const APP_KEY = "7FB595A51FAB2061737C3B5142CCA350";  // Let o
 // Delay between uplinks
 #define UPLINK_INTERVAL_MS (60 * 1000)
 
+static void log_hex_payload(const char *prefix, const uint8_t *payload, size_t length)
+{
+    if (length == 0)
+    {
+        ESP_LOGI(TAG, "%s: <leegPayload>", prefix);
+        return;
+    }
+
+    char hex[(length * 2) + 1];
+    for (size_t i = 0; i < length; ++i)
+    {
+        snprintf(&hex[i * 2], 3, "%02X", payload[i]);
+    }
+    hex[length * 2] = '\0';
+    ESP_LOGI(TAG, "%s: %s", prefix, hex);
+}
+
 static void log_downlink(const uint8_t *payload, size_t length, ttn_port_t port)
 {
     ESP_LOGI(TAG, "Downlink ontvangen op port %u, %u bytes", port, (unsigned)length);
-    if (length > 0)
-    {
-        char hex[(length * 2) + 1];
-        for (size_t i = 0; i < length; ++i)
-        {
-            snprintf(&hex[i * 2], 3, "%02X", payload[i]);
-        }
-        hex[length * 2] = '\0';
-        ESP_LOGI(TAG, "Payload (hex): %s", hex);
-    }
+    log_hex_payload("Downlink payload (hex)", payload, length);
 }
 
 static void init_nvs(void)
@@ -125,6 +133,7 @@ void app_main(void)
             (uint8_t)(frame_counter & 0xFF),
         };
 
+        log_hex_payload("Uplink payload (hex)", payload, sizeof(payload));
         ttn_response_code_t result = ttn_transmit_message(payload, sizeof(payload), 1, false);
         if (result == TTN_SUCCESSFUL_TRANSMISSION)
         {
