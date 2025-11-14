@@ -14,7 +14,7 @@
 
 static const char *TAG = "lorawan";
 
-// --- LoRa radio pin mapping for FireBeetle ESP32 + LoRa cover ----------------
+// --- LoRa radio pin mapping for FireBeetle ESP32 + LoRa cover 868MHz v1.0 ----
 #define LORA_SPI_HOST SPI2_HOST
 #define LORA_PIN_MISO GPIO_NUM_19
 #define LORA_PIN_MOSI GPIO_NUM_23
@@ -25,9 +25,9 @@ static const char *TAG = "lorawan";
 #define LORA_PIN_DIO1 GPIO_NUM_9   // DIO1 (some boards leave this unconnected)
 
 // --- TTN credentials (replace with values from the TTN console) --------------
-static const char *const DEV_EUI = "0000000000000000";
-static const char *const APP_EUI = "0000000000000000";
-static const char *const APP_KEY = "00000000000000000000000000000000";
+static const char *const DEV_EUI = "70B3D57ED0073702";
+static const char *const APP_EUI = "0000000000000000";  // TODO: Vul AppEUI/JoinEUI in vanuit TTN console (niet zichtbaar in afbeelding)
+static const char *const APP_KEY = "7FB595A51FAB2061737C3B5142CCA350";  // Let op: dit is AppSKey uit sessie, niet AppKey! Controleer TTN console voor juiste AppKey
 
 // Delay between uplinks
 #define UPLINK_INTERVAL_MS (60 * 1000)
