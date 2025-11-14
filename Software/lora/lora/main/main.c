@@ -25,9 +25,9 @@ static const char *TAG = "lorawan";
 #define LORA_PIN_DIO1 GPIO_NUM_9   // DIO1 (some boards leave this unconnected)
 
 // --- TTN credentials (replace with values from the TTN console) --------------
-static const char *const DEV_EUI = "70B3D57ED0073702";
-static const char *const APP_EUI = "0000000000000000";  // TODO: Vul AppEUI/JoinEUI in vanuit TTN console (niet zichtbaar in afbeelding)
-static const char *const APP_KEY = "7FB595A51FAB2061737C3B5142CCA350";  // Let op: dit is AppSKey uit sessie, niet AppKey! Controleer TTN console voor juiste AppKey
+static const char *const DEV_EUI = "70B3D57ED0074070";
+static const char *const APP_EUI = "70B3D57ED0073702";  // TODO: Vul AppEUI/JoinEUI in vanuit TTN console (niet zichtbaar in afbeelding)
+static const char *const APP_KEY = "B43689D3C3F09A6EA5C4A77A24B7D46D";  // Let op: dit is AppSKey uit sessie, niet AppKey! Controleer TTN console voor juiste AppKey
 
 // Delay between uplinks
 #define UPLINK_INTERVAL_MS (60 * 1000)
@@ -103,52 +103,67 @@ void app_main(void)
     ensure_gpio_isr_service();
 
     ttn_init();
-    ttn_on_message(log_downlink);
     ttn_configure_pins(LORA_SPI_HOST, LORA_PIN_NSS, TTN_NOT_CONNECTED, LORA_PIN_RST, LORA_PIN_DIO0, LORA_PIN_DIO1);
 
-    if (!ttn_provision(DEV_EUI, APP_EUI, APP_KEY))
-    {
-        ESP_LOGE(TAG, "Provisioning mislukt, controleer EEPROM-toegang en keys");
-        return;
-    }
+    // The below line can be commented after the first run as the data is saved in NVS
+    ttn_provision(DEV_EUI, APP_EUI, APP_KEY);
+
+    // Register callback for received messages
+    ttn_on_message(log_downlink);
 
     // Stel Europese band in (868 MHz). Voor andere regio's, zie README of menuconfig.
     ttn_set_data_rate(TTN_DR_EU868_SF7_BW125);
     ttn_set_max_tx_pow(14); // dBm
 
     ESP_LOGI(TAG, "Join procedure gestart...");
-    if (!ttn_join())
+    ESP_LOGI(TAG, "Wachten op join (dit kan 30-60 seconden duren, soms langer)...");
+    
+    bool join_result = ttn_join();
+    ESP_LOGI(TAG, "ttn_join() retourneerde: %s", join_result ? "TRUE" : "FALSE");
+    
+    if (!join_result)
     {
         ESP_LOGE(TAG, "Join mislukt, controleer keys en gateway bereik");
+        ESP_LOGE(TAG, "Zonder succesvolle join kunnen we geen data verzenden!");
         return;
     }
-    ESP_LOGI(TAG, "Succesvol verbonden met TTN");
+    
+    ESP_LOGI(TAG, "✓ Succesvol verbonden met TTN");
+    ESP_LOGI(TAG, "Start met verzenden van uplinks...");
 
     uint32_t frame_counter = 0;
 
     while (true)
     {
+        ESP_LOGI(TAG, "=== Voorbereiden uplink #%lu ===", (unsigned long)frame_counter);
+        
         uint8_t payload[2] = {
             (uint8_t)((frame_counter >> 8) & 0xFF),
             (uint8_t)(frame_counter & 0xFF),
         };
 
         log_hex_payload("Uplink payload (hex)", payload, sizeof(payload));
+        ESP_LOGI(TAG, "Aanroepen ttn_transmit_message...");
+
         ttn_response_code_t result = ttn_transmit_message(payload, sizeof(payload), 1, false);
+        
+        ESP_LOGI(TAG, "ttn_transmit_message retourneerde: %d", (int)result);
+        
         if (result == TTN_SUCCESSFUL_TRANSMISSION)
         {
-            ESP_LOGI(TAG, "Uplink #%lu verzonden", (unsigned long)frame_counter);
+            ESP_LOGI(TAG, "✓ Uplink #%lu succesvol verzonden", (unsigned long)frame_counter);
         }
         else if (result == TTN_SUCCESSFUL_RECEIVE)
         {
-            ESP_LOGI(TAG, "Uplink #%lu met bevestigde downlink", (unsigned long)frame_counter);
+            ESP_LOGI(TAG, "✓ Uplink #%lu verzonden met downlink ontvangen", (unsigned long)frame_counter);
         }
         else
         {
-            ESP_LOGW(TAG, "Uplink #%lu mislukt (code %d)", (unsigned long)frame_counter, (int)result);
+            ESP_LOGW(TAG, "✗ Uplink #%lu mislukt (code %d)", (unsigned long)frame_counter, (int)result);
         }
 
         frame_counter++;
+        ESP_LOGI(TAG, "Wachten %lu ms tot volgende uplink...", (unsigned long)UPLINK_INTERVAL_MS);
         vTaskDelay(pdMS_TO_TICKS(UPLINK_INTERVAL_MS));
     }
 }
