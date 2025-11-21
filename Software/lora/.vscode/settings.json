@@ -1,3 +1,7 @@
 {
-    "idf.portWin": "COM7"
+    "idf.portWin": "COM7",
+    "cmake.sourceDirectory": "C:/Users/warre/Desktop/school/project/IOT_Nox_Project/Software/lora/lora/main",
+    "idf.espIdfPathWin": "C:\\Users\\warre\\esp\\v5.5.1\\esp-idf",
+    "idf.toolsPathWin": "C:\\Espressif",
+    "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe"
 }
