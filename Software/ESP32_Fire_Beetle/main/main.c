@@ -9,8 +9,13 @@
 // UART configuratie
 #define UART_NUM UART_NUM_1
 #define BUF_SIZE (1024)
-#define TXD_PIN (GPIO_NUM_26)
-#define RXD_PIN (GPIO_NUM_25)
+// versie 2
+// #define TXD_PIN (GPIO_NUM_26)
+// #define RXD_PIN (GPIO_NUM_25)
+
+// versie 1
+#define TXD_PIN (GPIO_NUM_17)
+#define RXD_PIN (GPIO_NUM_16)
 
 // Globale variabelen voor GPS-data
 typedef struct {
