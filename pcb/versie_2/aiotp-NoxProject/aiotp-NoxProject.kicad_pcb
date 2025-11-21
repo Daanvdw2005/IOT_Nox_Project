@@ -984,7 +984,7 @@
 			(at -1.825 -3.485 90)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "1ad5b05b-ccff-44d5-a91f-8d6d03a67c02")
+			(uuid "f6faccab-b535-483b-bdbb-980cdcd26a2e")
 			(effects
 				(font
 					(size 1 1)
@@ -996,7 +996,7 @@
 			(at 4.525 4.385 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "76c86c86-bc22-458f-b9b4-12c3152074dc")
+			(uuid "b0f2d9ab-cc49-4c79-8ec6-fa0881d2f1da")
 			(effects
 				(font
 					(size 1 1)
@@ -1008,7 +1008,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8ea93cc9-df26-4c2e-a418-bf0f24c6f6f8")
+			(uuid "1a4fa294-27a0-4154-aaf0-360f41ab413c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1020,7 +1020,7 @@
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "69c1a4ed-0d0a-4ee5-ab08-baf736578300")
+			(uuid "701df452-08ca-4421-98bc-358627e368ae")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1362,7 +1362,7 @@
 			(uuid "2a4b1162-f477-4c0d-9a82-458c257dbeff")
 		)
 		(fp_text user "VCC"
-			(at -3.5 -15.5 0)
+			(at -4.624708 -14.290761 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "30880302-3f0b-4c3f-9671-65341b12c7b3")
@@ -1375,7 +1375,7 @@
 			)
 		)
 		(fp_text user "GND"
-			(at 2.5 -15.5 0)
+			(at 2.875292 -14.790761 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "8bc94215-6ad0-445a-a2af-0e46be6bd635")
@@ -1388,7 +1388,7 @@
 			)
 		)
 		(fp_text user "RX"
-			(at -1.5 -15.5 0)
+			(at -2.124708 -14.540761 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "9ccaf2a7-b75b-4114-b7f8-c7a4e3805826")
@@ -1401,7 +1401,7 @@
 			)
 		)
 		(fp_text user "TX"
-			(at 0.5 -15.5 0)
+			(at 0.5 -14.540761 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "c275e064-3391-4cbf-b385-f755365b2ddb")
@@ -1448,7 +1448,7 @@
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(zone_connect 2)
-			(uuid "2ac6c8a5-6583-4119-872c-f3af2f2e0f82")
+			(uuid "0640e212-2155-41db-8440-28385640692c")
 		)
 		(pad "1" thru_hole rect
 			(at 3.672669 -15.540761 270)
@@ -1460,7 +1460,7 @@
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(solder_mask_margin 0.102)
-			(uuid "2ac6c8a5-6583-4119-872c-f3af2f2e0f82")
+			(uuid "e69b7c02-a744-4c08-9eb9-8e5395a264d1")
 		)
 		(pad "1" thru_hole circle
 			(at 9.85 -15 90)
@@ -1472,7 +1472,7 @@
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(zone_connect 2)
-			(uuid "2ac6c8a5-6583-4119-872c-f3af2f2e0f82")
+			(uuid "fd64e8d0-f8f5-42a5-b19e-6c84af2f5b5f")
 		)
 		(pad "1" thru_hole circle
 			(at 9.85 15.5 90)
@@ -1484,7 +1484,7 @@
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(zone_connect 2)
-			(uuid "2ac6c8a5-6583-4119-872c-f3af2f2e0f82")
+			(uuid "e8fe3631-5e1d-476b-b500-6271cfd6da45")
 		)
 		(pad "2" thru_hole circle
 			(at 1.125292 -15.540761 270)
@@ -1529,6 +1529,17 @@
 			)
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3D_designs/GY-NEO6MV2-withAnt v7.step"
+			(offset
+				(xyz 12.8 30.5 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -0 -0 -90)
+			)
+		)
 	)
 	(footprint "TestPoint:TestPoint_THTPad_D1.0mm_Drill0.5mm"
 		(layer "F.Cu")
