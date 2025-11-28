@@ -49,7 +49,7 @@ volatile bool co2_ready = false;
 
 // Variabelen voor State Change verzending (Delta)
 volatile uint16_t last_sent_co2 = 0; 
-#define CO2_CHANGE_THRESHOLD 20 // OPGESCHOOND VAN VREEMDE TEKENS
+#define CO2_CHANGE_THRESHOLD 1 // OPGESCHOOND VAN VREEMDE TEKENS
 // GEEN VREEMDE TEKENS MEER OP LIJN 52!
 
 typedef struct {
@@ -203,7 +203,6 @@ void ttn_task(void *arg)
 
     ESP_LOGI(TAG, "CO2 klaar (%d ppm) -> controle elke 30 sec (versturen bij %d ppm verandering)", co2_ppm, CO2_CHANGE_THRESHOLD);
 
-    // Initialiseer last_sent_co2 om de eerste zending te garanderen
     last_sent_co2 = co2_ppm - CO2_CHANGE_THRESHOLD - 1; 
 
     uint32_t counter = 0;
@@ -213,39 +212,51 @@ void ttn_task(void *arg)
     while (1) {
         bool should_send = false;
         
-        // 1. Controleer Delta (ppm verandering)
         if (abs(co2_ppm - last_sent_co2) >= CO2_CHANGE_THRESHOLD) {
             should_send = true;
             ESP_LOGI(TAG, "TRIG: CO2-verandering > %d ppm", CO2_CHANGE_THRESHOLD);
         }
 
-        // 2. Controleer Heartbeat (eenmaal per uur)
         if (++heartbeat_counter >= HEARTBEAT_LIMIT) {
             should_send = true;
             heartbeat_counter = 0;
             ESP_LOGI(TAG, "TRIG: Heartbeat (1 uur)");
         }
 
-        // 3. Verstuur indien nodig
         if (should_send) {
-            uint8_t payload[11];
+            uint8_t payload[16]; // payload vergroot voor GPS timestamp
             int len = 2;
 
+            // CO2
             payload[0] = co2_ppm >> 8;
             payload[1] = co2_ppm & 0xFF;
 
             if (gps.valid) {
                 payload[len++] = 1;
+
+                // Latitude
                 int32_t lat = (int32_t)(gps.lat * 1000000);
-                int32_t lon = (int32_t)(gps.lon * 1000000);
                 payload[len++] = (lat >> 24) & 0xFF;
                 payload[len++] = (lat >> 16) & 0xFF;
                 payload[len++] = (lat >> 8) & 0xFF;
                 payload[len++] = lat & 0xFF;
+
+                // Longitude
+                int32_t lon = (int32_t)(gps.lon * 1000000);
                 payload[len++] = (lon >> 24) & 0xFF;
                 payload[len++] = (lon >> 16) & 0xFF;
                 payload[len++] = (lon >> 8) & 0xFF;
                 payload[len++] = lon & 0xFF;
+
+                // GPS UTC tijd
+                payload[len++] = gps.hour;
+                payload[len++] = gps.minute;
+                payload[len++] = gps.second;
+
+                // Optioneel: datum
+                payload[len++] = gps.day;
+                payload[len++] = gps.month;
+                payload[len++] = (uint8_t)(gps.year - 2000); // 1 byte voor jaar sinds 2000
             } else {
                 payload[len++] = 0;
             }
@@ -253,13 +264,12 @@ void ttn_task(void *arg)
             ESP_LOGI(TAG, "Uplink #%lu | CO2: %d ppm | GPS: %s", ++counter, co2_ppm, gps.valid?"JA":"NEE");
             ttn_transmit_message(payload, len, 1, false); 
             
-            // Update de laatst verzonden waarde NA succesvolle verzending
             last_sent_co2 = co2_ppm; 
         } else {
             ESP_LOGI(TAG, "Geen significante verandering. Wachten op volgende cyclus.");
         }
 
-        vTaskDelay(pdMS_TO_TICKS(UPLINK_INTERVAL_MS)); // Wacht 30 seconden
+        vTaskDelay(pdMS_TO_TICKS(UPLINK_INTERVAL_MS));
     }
 }
 
