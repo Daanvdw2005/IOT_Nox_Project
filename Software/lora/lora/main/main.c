@@ -19,8 +19,8 @@
 #define UART_CO2_BAUD       9600
 
 #define GPS_UART_NUM        UART_NUM_2
-#define GPS_RX_PIN          GPIO_NUM_36     // Correct, weg van GPIO 25
-#define GPS_TX_PIN          GPIO_NUM_10     // Opgelost: Weg van GPIO 26 (DIO0)
+#define GPS_RX_PIN          GPIO_NUM_14       // Correct, weg van GPIO 25
+#define GPS_TX_PIN          GPIO_NUM_12     // Opgelost: Weg van GPIO 26 (DIO0)
 #define GPS_BAUD            9600
 #define GPS_BUF_SIZE        1024
 
