@@ -11,6 +11,7 @@
 #include "freertos/task.h"
 #include "ttn.h"
 #include <math.h> // Voor abs()
+#include <time.h> // Voor epoch timestamp
 
 // ============================= CONFIG =============================
 #define UART_CO2_NUM        UART_NUM_1
@@ -19,8 +20,8 @@
 #define UART_CO2_BAUD       9600
 
 #define GPS_UART_NUM        UART_NUM_2
-#define GPS_RX_PIN          GPIO_NUM_14       // Correct, weg van GPIO 25
-#define GPS_TX_PIN          GPIO_NUM_12     // Opgelost: Weg van GPIO 26 (DIO0)
+#define GPS_RX_PIN          GPIO_NUM_14
+#define GPS_TX_PIN          GPIO_NUM_12
 #define GPS_BAUD            9600
 #define GPS_BUF_SIZE        1024
 
@@ -46,11 +47,8 @@ const char *APP_KEY = "B43689D3C3F09A6EA5C4A77A24B7D46D";
 // ============================= DATA =============================
 volatile uint16_t co2_ppm = 0;
 volatile bool co2_ready = false;
-
-// Variabelen voor State Change verzending (Delta)
 volatile uint16_t last_sent_co2 = 0; 
-#define CO2_CHANGE_THRESHOLD 1 // OPGESCHOOND VAN VREEMDE TEKENS
-// GEEN VREEMDE TEKENS MEER OP LIJN 52!
+#define CO2_CHANGE_THRESHOLD 1
 
 typedef struct {
     float lat, lon;
@@ -150,24 +148,17 @@ void gps_task(void *pvParameters)
     }
 }
 
-// ============================= CO2 TASK (Gecorrigeerd Commando & Logica) =============================
+// ============================= CO2 TASK =============================
 void co2_task(void *arg)
 {
-    // Juiste commando voor het LEZEN van de CO2-concentratie (0x86 functie voor TB600B/MH-Z19)
     uint8_t read_cmd[] = {0xFF,0x01,0x86,0x00,0x00,0x00,0x00,0x00,0x79}; 
     uint8_t data[9];
     
     while (1) {
-        // 1. Zorg dat de buffer leeg is om oude data te vermijden
         uart_flush(UART_CO2_NUM);
-        
-        // 2. Stuur het leescommando naar de TB600B
         uart_write_bytes(UART_CO2_NUM, read_cmd, 9);
-        
-        // 3. Wacht iets langer op het antwoord voor betrouwbaarheid
         vTaskDelay(pdMS_TO_TICKS(250)); 
 
-        // 4. Probeer 9 bytes te lezen met een langere timeout
         int len = uart_read_bytes(UART_CO2_NUM, data, 9, 250/portTICK_PERIOD_MS);
         
         if (len == 9) { 
@@ -189,11 +180,28 @@ void co2_task(void *arg)
             ESP_LOGE(TAG, "CO2: Geen of onvolledig antwoord (%d bytes ontvangen)", len);
         }
 
-        vTaskDelay(pdMS_TO_TICKS(1000)); // Lees elke seconde
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
-// ============================= TTN UPLINK TASK (met Delta Check en Heartbeat) =============================
+// ============================= GPS TO EPOCH =============================
+uint32_t gps_to_epoch(const gps_t *gps)
+{
+    if (!gps->valid) return 0;
+
+    struct tm t;
+    t.tm_year = gps->year - 1900;
+    t.tm_mon  = gps->month - 1;
+    t.tm_mday = gps->day;
+    t.tm_hour = gps->hour;
+    t.tm_min  = gps->minute;
+    t.tm_sec  = gps->second;
+    t.tm_isdst = 0;
+
+    return (uint32_t)mktime(&t);
+}
+
+// ============================= TTN UPLINK TASK =============================
 void ttn_task(void *arg)
 {
     while (!co2_ready) {
@@ -202,12 +210,11 @@ void ttn_task(void *arg)
     }
 
     ESP_LOGI(TAG, "CO2 klaar (%d ppm) -> controle elke 30 sec (versturen bij %d ppm verandering)", co2_ppm, CO2_CHANGE_THRESHOLD);
-
     last_sent_co2 = co2_ppm - CO2_CHANGE_THRESHOLD - 1; 
 
     uint32_t counter = 0;
     uint32_t heartbeat_counter = 0;
-    const uint32_t HEARTBEAT_LIMIT = 120; // 120 cycli * 30 sec = 1 uur heartbeat
+    const uint32_t HEARTBEAT_LIMIT = 120;
 
     while (1) {
         bool should_send = false;
@@ -224,39 +231,32 @@ void ttn_task(void *arg)
         }
 
         if (should_send) {
-            uint8_t payload[16]; // payload vergroot voor GPS timestamp
+            uint8_t payload[16];
             int len = 2;
 
-            // CO2
             payload[0] = co2_ppm >> 8;
             payload[1] = co2_ppm & 0xFF;
 
             if (gps.valid) {
                 payload[len++] = 1;
 
-                // Latitude
                 int32_t lat = (int32_t)(gps.lat * 1000000);
                 payload[len++] = (lat >> 24) & 0xFF;
                 payload[len++] = (lat >> 16) & 0xFF;
                 payload[len++] = (lat >> 8) & 0xFF;
                 payload[len++] = lat & 0xFF;
 
-                // Longitude
                 int32_t lon = (int32_t)(gps.lon * 1000000);
                 payload[len++] = (lon >> 24) & 0xFF;
                 payload[len++] = (lon >> 16) & 0xFF;
                 payload[len++] = (lon >> 8) & 0xFF;
                 payload[len++] = lon & 0xFF;
 
-                // GPS UTC tijd
-                payload[len++] = gps.hour;
-                payload[len++] = gps.minute;
-                payload[len++] = gps.second;
-
-                // Optioneel: datum
-                payload[len++] = gps.day;
-                payload[len++] = gps.month;
-                payload[len++] = (uint8_t)(gps.year - 2000); // 1 byte voor jaar sinds 2000
+                uint32_t ts = gps_to_epoch(&gps);
+                payload[len++] = (ts >> 24) & 0xFF;
+                payload[len++] = (ts >> 16) & 0xFF;
+                payload[len++] = (ts >> 8) & 0xFF;
+                payload[len++] = ts & 0xFF;
             } else {
                 payload[len++] = 0;
             }
@@ -300,7 +300,6 @@ void app_main(void)
     }
     ESP_LOGI(TAG, "Verbonden met TTN");
 
-    // CO2 UART
     uart_config_t uart_cfg = {
         .baud_rate = UART_CO2_BAUD,
         .data_bits = UART_DATA_8_BITS,
@@ -312,7 +311,6 @@ void app_main(void)
     uart_set_pin(UART_CO2_NUM, UART_CO2_TX_PIN, UART_CO2_RX_PIN, -1, -1);
     uart_driver_install(UART_CO2_NUM, 256, 0, 0, NULL, 0);
 
-    // Start taken
     xTaskCreate(co2_task, "co2", 4096, NULL, 10, NULL);
     xTaskCreate(gps_task, "gps", 4096, NULL, 8, NULL);
     xTaskCreate(ttn_task, "ttn", 4096, NULL, 5, NULL);
