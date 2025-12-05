@@ -10,7 +10,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "ttn.h"
-#include <math.h> // Voor abs()
+#include <math.h> // Voor abs() en atof()
 #include <time.h> // Voor epoch timestamp
 
 // ============================= CONFIG =============================
@@ -20,8 +20,8 @@
 #define UART_CO2_BAUD       9600
 
 #define GPS_UART_NUM        UART_NUM_2
-#define GPS_RX_PIN          GPIO_NUM_16
-#define GPS_TX_PIN          GPIO_NUM_17
+#define GPS_RX_PIN          GPIO_NUM_17
+#define GPS_TX_PIN          GPIO_NUM_16
 #define GPS_BAUD            9600
 #define GPS_BUF_SIZE        1024
 
@@ -51,7 +51,7 @@ volatile uint16_t last_sent_co2 = 0;
 #define CO2_CHANGE_THRESHOLD 1
 
 typedef struct {
-    float lat, lon;
+    double lat, lon; // Double voor betere precisie bij berekening
     uint8_t hour, minute, second, day, month;
     uint16_t year;
     bool valid;
@@ -59,27 +59,41 @@ typedef struct {
 
 gps_t gps = {0};
 
-// ============================= NMEA PARSER =============================
+// ============================= NMEA PARSER (GECORRIGEERD) =============================
 static void parse_nmea(char *sentence)
 {
     char *tokens[20];
     int n = 0;
+    
+    // strtok is destructief, maar 'sentence' is een kopie in gps_task buffer, dus ok.
     char *p = strtok(sentence, ",");
     while (p && n < 20) { tokens[n++] = p; p = strtok(NULL, ","); }
 
+    // Verwacht formaat: $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47
     if (n >= 10 && strstr(sentence, "GGA")) {
-        if (strlen(tokens[2]) < 4 || strlen(tokens[4]) < 4) return;
+        // Check of latitude/longitude velden gevuld zijn
+        if (strlen(tokens[2]) == 0 || strlen(tokens[4]) == 0) return;
 
-        int lat_deg = atoi(tokens[2]) / 100;
-        float lat_min = atof(tokens[2] + 2) / 100.0f;
-        gps.lat = lat_deg + lat_min / 60.0f;
+        // --- LATITUDE BEREKENING ---
+        // NMEA format is DDMM.MMMM (bv. 5113.490)
+        // DD = Graden, MM.MMMM = Minuten
+        double raw_lat = atof(tokens[2]);
+        int lat_deg = (int)(raw_lat / 100);        // Haal DD eruit (bv 51)
+        double lat_min = raw_lat - (lat_deg * 100); // Haal MM.MMMM eruit (bv 13.490)
+        gps.lat = lat_deg + (lat_min / 60.0);      // Zet minuten om naar graden (delen door 60)
+        
         if (tokens[3][0] == 'S') gps.lat = -gps.lat;
 
-        int lon_deg = atoi(tokens[4]) / 100;
-        float lon_min = atof(tokens[4] + (strlen(tokens[4]) > 7 ? 3 : 2)) / 100.0f;
-        gps.lon = lon_deg + lon_min / 60.0f;
+        // --- LONGITUDE BEREKENING ---
+        // NMEA format is DDDMM.MMMM (bv. 00424.593)
+        double raw_lon = atof(tokens[4]);
+        int lon_deg = (int)(raw_lon / 100);
+        double lon_min = raw_lon - (lon_deg * 100);
+        gps.lon = lon_deg + (lon_min / 60.0);
+        
         if (tokens[5][0] == 'W') gps.lon = -gps.lon;
 
+        // Tijd parsen (HHMMSS)
         if (strlen(tokens[1]) >= 6) {
             gps.hour   = (tokens[1][0]-'0')*10 + (tokens[1][1]-'0');
             gps.minute = (tokens[1][2]-'0')*10 + (tokens[1][3]-'0');
@@ -88,6 +102,7 @@ static void parse_nmea(char *sentence)
         gps.valid = true;
     }
 
+    // Datum parsen uit RMC (DDMMYY)
     if (n >= 10 && strstr(sentence, "RMC") && strlen(tokens[9]) == 6) {
         gps.day   = (tokens[9][0]-'0')*10 + (tokens[9][1]-'0');
         gps.month = (tokens[9][2]-'0')*10 + (tokens[9][3]-'0');
@@ -214,7 +229,7 @@ void ttn_task(void *arg)
 
     uint32_t counter = 0;
     uint32_t heartbeat_counter = 0;
-    const uint32_t HEARTBEAT_LIMIT = 120;
+    const uint32_t HEARTBEAT_LIMIT = 120; // 120 * 30sec = 60 minuten
 
     while (1) {
         bool should_send = false;
@@ -238,7 +253,7 @@ void ttn_task(void *arg)
             payload[1] = co2_ppm & 0xFF;
 
             if (gps.valid) {
-                payload[len++] = 1;
+                payload[len++] = 1; // GPS valid flag
 
                 int32_t lat = (int32_t)(gps.lat * 1000000);
                 payload[len++] = (lat >> 24) & 0xFF;
@@ -258,7 +273,7 @@ void ttn_task(void *arg)
                 payload[len++] = (ts >> 8) & 0xFF;
                 payload[len++] = ts & 0xFF;
             } else {
-                payload[len++] = 0;
+                payload[len++] = 0; // GPS invalid
             }
 
             ESP_LOGI(TAG, "Uplink #%lu | CO2: %d ppm | GPS: %s", ++counter, co2_ppm, gps.valid?"JA":"NEE");
@@ -284,6 +299,8 @@ void app_main(void)
         .mosi_io_num = LORA_PIN_MOSI,
         .miso_io_num = LORA_PIN_MISO,
         .sclk_io_num = LORA_PIN_SCK,
+        .quadwp_io_num = -1,
+        .quadhd_io_num = -1
     };
     spi_bus_initialize(LORA_SPI_HOST, &bus, SPI_DMA_CH_AUTO);
     gpio_install_isr_service(0);
@@ -317,4 +334,3 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Alles draait - eerste uplink over ~30 seconden (indien CO2-verandering)");
 }
-     
