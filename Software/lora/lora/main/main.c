@@ -15,13 +15,13 @@
 
 // ============================= CONFIG =============================
 #define UART_CO2_NUM        UART_NUM_1
-#define UART_CO2_RX_PIN     16
-#define UART_CO2_TX_PIN     17
+#define UART_CO2_RX_PIN     14
+#define UART_CO2_TX_PIN     12
 #define UART_CO2_BAUD       9600
 
 #define GPS_UART_NUM        UART_NUM_2
-#define GPS_RX_PIN          GPIO_NUM_14
-#define GPS_TX_PIN          GPIO_NUM_12
+#define GPS_RX_PIN          GPIO_NUM_16
+#define GPS_TX_PIN          GPIO_NUM_17
 #define GPS_BAUD            9600
 #define GPS_BUF_SIZE        1024
 
@@ -317,3 +317,4 @@ void app_main(void)
 
     ESP_LOGI(TAG, "Alles draait - eerste uplink over ~30 seconden (indien CO2-verandering)");
 }
+     
