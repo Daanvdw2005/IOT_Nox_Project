@@ -10,13 +10,12 @@ const port = 3000;
 // Nodig om de JSON-payload van TTN te verwerken
 app.use(bodyParser.json());
 
-// =======================================================
-// STAP 1: CONFIGURATIE-INSTELLINGEN
-// =======================================================
-const INFLUX_URL = 'http://localhost:8086'; 
-const INFLUX_TOKEN = 'qVAOiWIdgq9YVcWkwHLXCnDvtyyPAImpANQcZ6N2txsMVi7YKgOmLf8aRJjo_-KiptdgNbk9ibohuaiugxGr6Q=='; 
-const INFLUX_BUCKET = 'Nox_database_28_11_25_Epoch'; 
-const INFLUX_ORG = 'AP-Hogeschool'; 
+
+// INFLUXDB CONFIGURATIE - VERGEET NIET DIT TE VERVANGEN DOOR ENVIRONMENT VARIABELEN IN PRODUCTIE
+const INFLUX_URL = 'http://freeforall.project-iot-ap.be:8086'; 
+const INFLUX_TOKEN = 'ANnkMiMmGxcW98pl9M9YpeI2uuO521HI0tS-9sU9AtDGthPS3kv5ZuoQaL3Cl6XLBF_Iy8bqRLYWxAcb0GkaGQ=='; 
+const INFLUX_BUCKET = 'Nox_database_28_11_2025'; 
+const INFLUX_ORG = '5abb3979f50a4fa1'; 
 
 // InfluxDB Client Setup
 const client = new InfluxDB({ url: INFLUX_URL, token: INFLUX_TOKEN });
@@ -32,35 +31,41 @@ app.post('/ttn-ontvanger', async (req, res) => {
     console.log('\n--- TTN WebHook ontvangen ---');
     
     try {
-        // 1. DATA EXTRACTIE (Gebruikt nu de platte payload structuur)
+        // 1. DATA EXTRACTIE (met Default Waarden voor ontbrekende GPS)
         const deviceId = ttnData.end_device_ids.device_id;
         const payload = ttnData.uplink_message.decoded_payload;
 
         if (!payload) {
             console.warn('Geen gedecodeerde payload gevonden. Controleer TTN decoder.');
+            // Stuur status 204 (No Content) terug als er geen payload is, TTN zal dit niet als een fout zien
             return res.status(204).send("Geen payload.");
         }
 
-        // Nieuwe, platte velden uit de payload
-        const co2 = payload.co2_ppm; 
-        const latitude = payload.lat;
-        const longitude = payload.lon;
+        // --- Data-extractie en validatie ---
+
+        // CO2: Gebruik 0 als default indien de waarde ontbreekt of null is
+        const co2 = payload.co2_ppm || 0; 
         
-        // FIX: Gebruik de epoch timestamp (in seconden) en converteer naar milliseconden (x 1000)
-        // Dit is de meest betrouwbare methode voor InfluxDB.
-        const epochTimeSeconds = payload.timestamp;
+        // Latitude & Longitude: Gebruik 0.0 als default indien de waarde ontbreekt of null is.
+        // Dit voorkomt de fout 'invalid float value for field 'latitude': null' bij InfluxDB.
+        const latitude = payload.lat === null || payload.lat === undefined ? 0.0 : payload.lat;
+        const longitude = payload.lon === null || payload.lon === undefined ? 0.0 : payload.lon;
+        
+        // FIX: Gebruik de epoch timestamp en converteer naar milliseconden
+        // Gebruik de huidige tijd als fallback als de timestamp ontbreekt in de payload
+        const epochTimeSeconds = payload.timestamp || Math.floor(Date.now() / 1000); 
         const epochTimeMs = epochTimeSeconds * 1000; 
         
-        console.log(`Verwerk data: Device=${deviceId}, CO2=${co2}, Lat=${latitude}, Epoch (ms)=${epochTimeMs}`);
+        console.log(`Verwerk data: Device=${deviceId}, CO2=${co2}, Lat=${latitude}, Lon=${longitude}, Epoch (ms)=${epochTimeMs}`);
 
         // 2. INFLUXDB POINT GENEREREN
         const point = new Point('sensor_metingen') 
-            .tag('device_id', deviceId)                 
+            .tag('device_id', deviceId) 
             
-            // De sensormetingen (Fields)
-            .intField('co2_ppm', co2)                       
-            .floatField('latitude', latitude)         
-            .floatField('longitude', longitude)       
+            // De sensormetingen (Fields) - Nu veilig, aangezien null-waarden 0 of 0.0 zijn
+            .intField('co2_ppm', co2) 
+            .floatField('latitude', latitude) 
+            .floatField('longitude', longitude) 
             
             // Gebruik de epoch timestamp in milliseconden
             .timestamp(epochTimeMs); 
@@ -82,5 +87,5 @@ app.post('/ttn-ontvanger', async (req, res) => {
 // Start de server
 app.listen(port, () => {
     console.log(`Middleware luistert op http://localhost:${port}`);
-    console.log(`Vergeet niet ngrok te starten in een andere terminal: ./ngrok http ${port}`);
+    // BELANGRIJK: Vergeet niet ngrok te starten om de server publiek te maken
 });
